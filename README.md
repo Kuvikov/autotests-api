@@ -2,6 +2,11 @@
 Проект автоматизации тестирования API с использованием современных инструментов и практик.
 ### Технологический стек
 ```
+pytest, httpx, pydantic, allure, Faker, jsonschema
+```
+# Быстрый старт
+### Технологический стек
+```
 pytest, httpx, pydantic, allure, Faker, jsonschema, 
 ```
 # Быстрый старт
