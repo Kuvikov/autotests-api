@@ -2,11 +2,11 @@ import allure
 
 from clients.courses.courses_schema import (
     CourseSchema,
+    CreateCourseRequestSchema,
+    CreateCourseResponseSchema,
+    GetCoursesResponseSchema,
     UpdateCourseRequestSchema,
     UpdateCourseResponseSchema,
-    GetCoursesResponseSchema,
-    CreateCourseResponseSchema,
-    CreateCourseRequestSchema,
 )
 from tools.assertions.base import assert_equal, assert_length
 from tools.assertions.files import assert_file
@@ -55,8 +55,8 @@ def assert_update_course_response(
 
 @allure.step("Check get courses response")
 def assert_get_courses_response(
-        get_courses_response: GetCoursesResponseSchema,
-        create_course_responses: list[CreateCourseResponseSchema]
+    get_courses_response: GetCoursesResponseSchema,
+    create_course_responses: list[CreateCourseResponseSchema],
 ):
     """
     Проверяет, что ответ на получение списка курсов соответствует ответам на их создание.
@@ -73,8 +73,8 @@ def assert_get_courses_response(
 
 @allure.step("Check create course response")
 def assert_create_course_response(
-        request: CreateCourseRequestSchema,
-        response: CreateCourseResponseSchema,
+    request: CreateCourseRequestSchema,
+    response: CreateCourseResponseSchema,
 ):
     """
     Проверяет, что ответ на создание курса соответствует данным из запроса.
@@ -89,4 +89,6 @@ def assert_create_course_response(
     assert_equal(response.course.description, request.description, "description")
     assert_equal(response.course.estimated_time, request.estimated_time, "estimated_time")
     assert_equal(response.course.preview_file.id, request.preview_file_id, "preview_file_id")
-    assert_equal(response.course.created_by_user.id, request.created_by_user_id, "created_by_user_id")
+    assert_equal(
+        response.course.created_by_user.id, request.created_by_user_id, "created_by_user_id"
+    )

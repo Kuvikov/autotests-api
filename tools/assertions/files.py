@@ -1,14 +1,28 @@
 import allure
 
-from clients.files.files_schema import CreateFileResponseSchema, CreateFileRequestSchema, FileSchema, GetFileResponseSchema
-from clients.errors_schema import ValidationErrorResponseSchema, ValidationErrorSchema, InternalErrorResponseSchema
+from clients.errors_schema import (
+    InternalErrorResponseSchema,
+    ValidationErrorResponseSchema,
+    ValidationErrorSchema,
+)
+from clients.files.files_schema import (
+    CreateFileRequestSchema,
+    CreateFileResponseSchema,
+    FileSchema,
+    GetFileResponseSchema,
+)
 from config import settings
 from tools.assertions.base import assert_equal
-from tools.assertions.errors import assert_validation_error_response, assert_internal_error_response
+from tools.assertions.errors import (
+    assert_internal_error_response,
+    assert_validation_error_response,
+)
 
 
 @allure.step("Check create file response")
-def assert_create_file_response(request: CreateFileRequestSchema, response: CreateFileResponseSchema):
+def assert_create_file_response(
+    request: CreateFileRequestSchema, response: CreateFileResponseSchema
+):
     """
     Проверяет, что ответ на создание файла соответствует запросу.
 
@@ -17,8 +31,12 @@ def assert_create_file_response(request: CreateFileRequestSchema, response: Crea
     :raises AssertionError: Если хотя бы одно поле не совпадает.
     """
     # Формируем ожидаемую ссылку на загруженный файл
-    expected_url = f"{settings.http_client.client_url}static/{request.directory}/{request.filename}"
-    assert_equal(str(response.file.url), expected_url, "url")   # response.file.url имеет тип HttpUrl из Pydantic, поэтому переводим в строку
+    expected_url = (
+        f"{settings.http_client.client_url}static/{request.directory}/{request.filename}"
+    )
+    assert_equal(
+        str(response.file.url), expected_url, "url"
+    )  # response.file.url имеет тип HttpUrl из Pydantic, поэтому переводим в строку
     assert_equal(response.file.filename, request.filename, "filename")
     assert_equal(response.file.directory, request.directory, "directory")
 
@@ -40,8 +58,7 @@ def assert_file(actual: FileSchema, expected: FileSchema):
 
 @allure.step("Check get file response")
 def assert_get_file_response(
-        get_file_response: GetFileResponseSchema,
-        create_file_response: CreateFileResponseSchema
+    get_file_response: GetFileResponseSchema, create_file_response: CreateFileResponseSchema
 ):
     """
     Проверяет, что ответ на получение файла соответствует ответу на его создание.
@@ -68,7 +85,7 @@ def assert_create_file_with_empty_filename_response(actual: ValidationErrorRespo
                 input="",  # Пустое имя файла.
                 context={"min_length": 1},  # Минимальная длина строки должна быть 1 символ.
                 message="String should have at least 1 character",  # Сообщение об ошибке.
-                location=["body", "filename"]  # Ошибка возникает в теле запроса, поле "filename".
+                location=["body", "filename"],  # Ошибка возникает в теле запроса, поле "filename".
             )
         ]
     )
@@ -86,11 +103,14 @@ def assert_create_file_with_empty_directory_response(actual: ValidationErrorResp
     expected = ValidationErrorResponseSchema(
         details=[
             ValidationErrorSchema(
-                type="string_too_short",        # Тип ошибки, связанной с слишком короткой строкой.
-                input="",                       # Пустая директория.
-                context={"min_length": 1},      # Минимальная длина строки должна быть 1 символ.
+                type="string_too_short",  # Тип ошибки, связанной с слишком короткой строкой.
+                input="",  # Пустая директория.
+                context={"min_length": 1},  # Минимальная длина строки должна быть 1 символ.
                 message="String should have at least 1 character",  # Сообщение об ошибке.
-                location=["body", "directory"]  # Ошибка возникает в теле запроса, поле "directory".
+                location=[
+                    "body",
+                    "directory",
+                ],  # Ошибка возникает в теле запроса, поле "directory".
             )
         ]
     )
@@ -110,9 +130,7 @@ def assert_file_not_found_response(actual: InternalErrorResponseSchema):
 
 
 @allure.step("Check get file with incorrect file id response")
-def assert_get_file_with_incorrect_file_id_response(
-    actual: ValidationErrorResponseSchema
-):
+def assert_get_file_with_incorrect_file_id_response(actual: ValidationErrorResponseSchema):
     """
     Проверяет, что ответ на запрос данных несуществующего файла соответствует ожидаемой валидационной ошибке.
 
@@ -124,9 +142,13 @@ def assert_get_file_with_incorrect_file_id_response(
             ValidationErrorSchema(
                 type="uuid_parsing",
                 input="incorrect-file-id",
-                context={"error": "invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1"},
+                context={
+                    "error": (
+                        "invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1"
+                    )
+                },
                 message="Input should be a valid UUID, invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1",
-                location=["path", "file_id"]
+                location=["path", "file_id"],
             )
         ]
     )

@@ -20,8 +20,9 @@
         "black-formatter.interpreter": [
             "venv/bin/python3.11"
         ],
-        "isort.interpreter": [
-            "venv/bin/python3.11"
+        "isort.args": [
+            "--profile=black",
+            "--line-length=99"
         ],
         "[python]": {
             "editor.defaultFormatter": "ms-python.black-formatter",
@@ -37,12 +38,9 @@
             "**/*.egg-info": true
         },
         "python.defaultInterpreterPath": "venv/bin/python3.11",
-        "python.testing.pytestArgs": [
-            "."
-        ],
+        "python.testing.pytestArgs": ["."],
         "python.testing.unittestEnabled": false,
         "python.testing.pytestEnabled": true,
-        "editor.defaultFormatter": "ms-python.black-formatter",
         "[jsonc]": {
             "editor.defaultFormatter": "vscode.json-language-features"
         }

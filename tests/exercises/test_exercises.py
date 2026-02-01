@@ -4,32 +4,32 @@ import allure
 import pytest
 from allure_commons.types import Severity
 
+from clients.errors_schema import InternalErrorResponseSchema
 from clients.exercises.exercises_client import ExercisesClient
 from clients.exercises.exercises_schema import (
     CreateExerciseRequestSchema,
     CreateExerciseResponseSchema,
-    UpdateExerciseRequestSchema,
-    UpdateExerciseResponseSchema,
+    GetExerciseResponseSchema,
     GetExercisesQuerySchema,
     GetExercisesResponseSchema,
-    GetExerciseResponseSchema,
+    UpdateExerciseRequestSchema,
+    UpdateExerciseResponseSchema,
 )
 from fixtures.courses import CourseFixture
 from fixtures.exercises import ExerciseFixture
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStory
 from tools.allure.tags import AllureTag
 from tools.assertions.base import assert_status_code
 from tools.assertions.exercises import (
     assert_create_exercise_response,
-    assert_update_exercise_response,
     assert_exercise_not_found_response,
-    assert_get_exercises_response,
     assert_get_exercise_response,
+    assert_get_exercises_response,
+    assert_update_exercise_response,
 )
-from clients.errors_schema import InternalErrorResponseSchema
 from tools.assertions.schema import validate_json_schema
-from tools.allure.epics import AllureEpic
-from tools.allure.features import AllureFeature
-from tools.allure.stories import AllureStory
 
 
 @pytest.mark.exercises

@@ -2,20 +2,21 @@ import allure
 from httpx import Response
 
 from clients.api_client import APIClient
-from clients.private_http_builder import AuthenticationUserSchema, get_private_http_client
 from clients.courses.courses_schema import (
-    GetCoursesQuerySchema,
     CreateCourseRequestSchema,
-    UpdateCourseRequestSchema,
+    CreateCourseResponseSchema,
+    GetCoursesQuerySchema,
     GetCoursesResponseSchema,
-    CreateCourseResponseSchema
+    UpdateCourseRequestSchema,
 )
+from clients.private_http_builder import AuthenticationUserSchema, get_private_http_client
 
 
 class CoursesClient(APIClient):
     """
     Клиент для работы c /api/v1/courses
     """
+
     @allure.step("Get courses")
     def get_courses_api(self, query: GetCoursesQuerySchema) -> Response:
         """

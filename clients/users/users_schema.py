@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field, EmailStr, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
+
 from tools.fakers import fake
 
 
@@ -6,6 +7,7 @@ class UserSchema(BaseModel):
     """
     Описание структуры пользователя.
     """
+
     id: str
     email: EmailStr
     last_name: str = Field(alias='lastName')
@@ -20,6 +22,7 @@ class CreateUserRequestSchema(BaseModel):
     """
     Описание структуры запроса на создание пользователя.
     """
+
     model_config = ConfigDict(populate_by_name=True)
 
     email: EmailStr = Field(default_factory=fake.email)
@@ -33,6 +36,7 @@ class CreateUserResponseSchema(BaseModel):
     """
     Описание структуры ответа создания пользователя.
     """
+
     user: UserSchema
 
 
@@ -40,6 +44,7 @@ class GetUserResponseSchema(BaseModel):
     """
     Описание структуры ответа на просмотр пользователя.
     """
+
     user: UserSchema
 
 
@@ -47,6 +52,7 @@ class UpdateUserRequestSchema(BaseModel):
     """
     Описание структуры запроса на обновление пользователя.
     """
+
     model_config = ConfigDict(populate_by_name=True)
 
     email: EmailStr | None = Field(default_factory=fake.email)

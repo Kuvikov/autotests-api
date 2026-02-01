@@ -1,8 +1,7 @@
 import allure
 
 from clients.authentication.authentication_schema import LoginResponseSchema
-from tools.assertions.base import assert_equal
-from tools.assertions.base import assert_is_true
+from tools.assertions.base import assert_equal, assert_is_true
 
 
 @allure.step("Check login response")

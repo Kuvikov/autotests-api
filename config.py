@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl, FilePath
+from pydantic import BaseModel, FilePath, HttpUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 

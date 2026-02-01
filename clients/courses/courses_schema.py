@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
+
 from clients.files.files_schema import FileSchema
 from clients.users.users_schema import UserSchema
 from tools.fakers import fake
@@ -9,6 +10,7 @@ class CourseSchema(BaseModel):
     """
     Описание структуры курса.
     """
+
     id: str
     title: str
     max_score: int = Field(alias='maxScore')
@@ -23,6 +25,7 @@ class GetCoursesQuerySchema(BaseModel):
     """
     Описание структуры запроса на получение списка курсов.
     """
+
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
     user_id: str
@@ -32,6 +35,7 @@ class CreateCourseRequestSchema(BaseModel):
     """
     Описание структуры запроса на создание курса.
     """
+
     model_config = ConfigDict(populate_by_name=True)
 
     title: str = Field(default_factory=fake.sentence)
@@ -47,6 +51,7 @@ class CreateCourseResponseSchema(BaseModel):
     """
     Описание структуры ответа создания курса.
     """
+
     course: CourseSchema
 
 
@@ -54,6 +59,7 @@ class GetCoursesResponseSchema(BaseModel):
     """
     Описание структуры ответа просмотра курса.
     """
+
     courses: list[CourseSchema]
 
 
@@ -61,6 +67,7 @@ class UpdateCourseRequestSchema(BaseModel):
     """
     Описание структуры запроса на обновление курса.
     """
+
     model_config = ConfigDict(populate_by_name=True)
 
     title: str | None = Field(default_factory=fake.sentence)
@@ -74,4 +81,5 @@ class UpdateCourseResponseSchema(BaseModel):
     """
     Описание структуры ответа обновления курса.
     """
+
     course: CourseSchema

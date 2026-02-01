@@ -1,5 +1,6 @@
-import allure
 from typing import Any, Sized
+
+import allure
 
 
 @allure.step("Check that response status code equals to {expected}")
@@ -29,9 +30,7 @@ def assert_equal(actual: Any, expected: Any, name: str):
     :raises AssertionError: Если фактическое значение не равно ожидаемому.
     """
     assert actual == expected, (
-        f'Incorrect value: "{name}". '
-        f'Expected value: {expected}. '
-        f'Actual value: {actual}'
+        f'Incorrect value: "{name}". ' f'Expected value: {expected}. ' f'Actual value: {actual}'
     )
 
 
@@ -44,10 +43,7 @@ def assert_is_true(actual: Any, name: str):
     :param actual: Фактическое значение.
     :raises AssertionError: Если фактическое значение ложно.
     """
-    assert actual, (
-        f'Incorrect value: "{name}". '
-        f'Expected true value but got: {actual}'
-    )
+    assert actual, f'Incorrect value: "{name}". ' f'Expected true value but got: {actual}'
 
 
 def assert_length(actual: Sized, expected: Sized, name: str):
