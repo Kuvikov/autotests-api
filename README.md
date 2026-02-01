@@ -4,16 +4,7 @@
 ```
 pytest, httpx, pydantic, allure, Faker, jsonschema
 ```
-# Быстрый старт
-### Технологический стек
-```
-pytest, httpx, pydantic, allure, Faker, jsonschema, 
-```
-# Быстрый старт
-### Технологический стек
-```
-pytest, httpx, pydantic, allure, Faker, jsonschema, 
-```
+
 # Быстрый старт
 ## Клонировать репозиторий
 ```bash
@@ -83,4 +74,4 @@ HTTP_CLIENT.TIMEOUT=100
 В левом верхнем углу "File" → Open Workspace... → выбрать vscode.code-workspace
 ```
 
-## Описание проекта
+# Описание проекта
