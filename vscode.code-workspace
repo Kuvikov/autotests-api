@@ -2,10 +2,6 @@
     "folders": [
         {
             "path": "."
-        },
-        {
-            "name": "web_app_server",
-            "path": "../qa-automation-engineer-api-course"
         }
     ],
     "settings": {
