@@ -31,6 +31,8 @@ pip install -r requirements.txt
 ### Настроить переменные окружения
 ```bash
 mcedit .env
+mkdir allure-results
+touch allure-results/environment.properties:
 ```
 
 ### Отредактировать .env файл
@@ -39,6 +41,14 @@ TEST_DATA.IMAGE_PNG_FILE="путь к файлу"
 
 HTTP_CLIENT.URL="http://свой сервер"
 HTTP_CLIENT.TIMEOUT=100
+```
+
+### Отредактировать environment.properties файл
+```text
+os_platform = linux
+os_release = 6.8.0-90-generic
+os_version = #91-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 18 14:14:30 UTC 2025
+python_version = Python 3.12.3
 ```
 
 ## Настройка рабочего пространства VS Code
